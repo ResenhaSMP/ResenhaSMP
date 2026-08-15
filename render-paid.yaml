@@ -1,6 +1,6 @@
 services:
   - type: web
-    name: eaglercraft-survival-paid
+    name: resenhasmp
     runtime: docker
     plan: standard
     dockerfilePath: ./Dockerfile
