@@ -26,11 +26,13 @@ services:
       - key: MAX_MEMORY
         value: 256M
       - key: JVM_OPTS
-        value: "-XX:+UseSerialGC -XX:ActiveProcessorCount=1 -Xss192k -XX:MaxMetaspaceSize=96M -XX:MaxDirectMemorySize=48M -XX:ReservedCodeCacheSize=12M"
+        value: "-XX:+UseSerialGC -XX:ActiveProcessorCount=1 -Xss256k -XX:MaxMetaspaceSize=96M -XX:MaxDirectMemorySize=48M -XX:ReservedCodeCacheSize=12M"
       - key: MALLOC_ARENA_MAX
         value: "1"
       - key: CLEAN_SERVER_LIBRARIES
         value: "false"
+      - key: PREPATCH_PAPER
+        value: "true"
       - key: ONLINE_MODE
         value: "false"
       - key: ENABLE_RCON

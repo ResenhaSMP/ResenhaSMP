@@ -6,4 +6,11 @@ export SERVER_PORT="${PORT}"
 export ENABLE_AUTOPAUSE="false"
 export ENABLE_AUTOSTOP="false"
 
+if [ "${PREPATCH_PAPER:-false}" = "true" ]; then
+  mkdir -p /data/cache
+  cp -f /opt/paper-prepatch/paper-1.12.2-1620.jar /data/paper-1.12.2-1620.jar
+  cp -f /opt/paper-prepatch/cache/patched_1.12.2.jar /data/cache/patched_1.12.2.jar
+  export PAPER_CUSTOM_JAR=/data/paper-1.12.2-1620.jar
+fi
+
 exec /image/scripts/start "$@"

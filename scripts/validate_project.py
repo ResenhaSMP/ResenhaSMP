@@ -41,9 +41,12 @@ assert env.get("INIT_MEMORY") == "128M"
 assert env.get("MAX_MEMORY") == "256M"
 assert "MaxMetaspaceSize=96M" in env.get("JVM_OPTS", "")
 assert "MaxDirectMemorySize=48M" in env.get("JVM_OPTS", "")
+assert "-Xss256k" in env.get("JVM_OPTS", "")
+assert "ReservedCodeCacheSize=12M" in env.get("JVM_OPTS", "")
 assert env.get("MALLOC_ARENA_MAX") == "1"
 assert env.get("USE_AIKAR_FLAGS") == "false"
 assert env.get("CLEAN_SERVER_LIBRARIES") == "false"
+assert env.get("PREPATCH_PAPER") == "true"
 
 free_services = free_blueprint.get("services")
 assert isinstance(free_services, list) and free_services, "render-free.yaml precisa conter um serviço"
@@ -65,6 +68,9 @@ assert free_env.get("MAX_MEMORY") == "256M"
 assert "MaxMetaspaceSize=96M" in free_env.get("JVM_OPTS", "")
 assert "MaxDirectMemorySize=48M" in free_env.get("JVM_OPTS", "")
 assert free_env.get("MALLOC_ARENA_MAX") == "1"
+assert "-Xss256k" in free_env.get("JVM_OPTS", "")
+assert "ReservedCodeCacheSize=12M" in free_env.get("JVM_OPTS", "")
+assert free_env.get("PREPATCH_PAPER") == "true"
 assert free_env.get("USE_AIKAR_FLAGS") == "false"
 assert free_env.get("CLEAN_SERVER_LIBRARIES") == "false"
 free_plugins = free_env.get("PLUGINS", "")
@@ -104,6 +110,12 @@ assert settings["server_name"] == "Eaglercraft Survival"
 assert settings["http_websocket_compression_level"] == 6
 assert listener["dual_stack"] is True
 assert listener["forward_ip_header"] == "X-Forwarded-For"
+
+dockerfile = (ROOT / "Dockerfile").read_text(encoding="utf-8")
+assert "paper-1.12.2-1620.jar" in dockerfile
+assert "patched_1.12.2.jar" in dockerfile
+assert "PAPER_SHA256" in dockerfile
+assert "PREPATCH_PAPER" in (ROOT / "scripts/render-start.sh").read_text(encoding="utf-8")
 
 for required in (
     "Dockerfile",
