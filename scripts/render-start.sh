@@ -6,6 +6,8 @@ export SERVER_PORT="${PORT}"
 export ENABLE_AUTOPAUSE="false"
 export ENABLE_AUTOSTOP="false"
 
+cp -f /opt/server-icon.png /data/server-icon.png
+
 if [ "${PREPATCH_PAPER:-false}" = "true" ]; then
   mkdir -p /data/cache
   cp -f /opt/paper-prepatch/paper-1.12.2-1620.jar /data/paper-1.12.2-1620.jar

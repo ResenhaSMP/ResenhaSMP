@@ -23,6 +23,7 @@ FROM itzg/minecraft-server:java17
 
 COPY --from=paper-prepatch /opt/paper-prepatch/paper-1.12.2-1620.jar /opt/paper-prepatch/paper-1.12.2-1620.jar
 COPY --from=paper-prepatch /opt/paper-prepatch/cache/patched_1.12.2.jar /opt/paper-prepatch/cache/patched_1.12.2.jar
+COPY assets/server-icon.png /opt/server-icon.png
 COPY --chmod=755 scripts/render-start.sh /render-start.sh
 
 ENV COPY_CONFIG_DEST=/data

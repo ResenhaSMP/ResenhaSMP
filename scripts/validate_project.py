@@ -1,6 +1,8 @@
 from pathlib import Path
 import tomllib
 
+from PIL import Image
+
 import yaml
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -115,11 +117,18 @@ dockerfile = (ROOT / "Dockerfile").read_text(encoding="utf-8")
 assert "paper-1.12.2-1620.jar" in dockerfile
 assert "patched_1.12.2.jar" in dockerfile
 assert "PAPER_SHA256" in dockerfile
+assert "assets/server-icon.png /opt/server-icon.png" in dockerfile
+icon_path = ROOT / "assets/server-icon.png"
+assert icon_path.is_file()
+with Image.open(icon_path) as icon:
+    assert icon.size == (64, 64)
+    assert icon.format == "PNG"
 assert "PREPATCH_PAPER" in (ROOT / "scripts/render-start.sh").read_text(encoding="utf-8")
 
 for required in (
     "Dockerfile",
     "README.md",
+    "assets/server-icon.png",
     "render-free.yaml",
     "scripts/render-start.sh",
     "config/server.properties",
