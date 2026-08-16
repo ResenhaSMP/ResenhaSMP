@@ -55,7 +55,7 @@ assert env.get("MOTD") == "O server mais resenhudo do Eaglercraft"
 
 free_services = free_blueprint.get("services")
 assert isinstance(free_services, list) and free_services, "render-free.yaml precisa conter um serviço"
-assert free_services[0].get("name") == "eaglercraft-survival-free", "render-free.yaml deve usar o nome eaglercraft-survival-free"
+assert free_services[0].get("name") == "resenhasmp", "render-free.yaml deve usar o nome resenhasmp"
 free_service = free_services[0]
 assert free_service.get("type") == "web"
 assert free_service.get("runtime") == "docker"
